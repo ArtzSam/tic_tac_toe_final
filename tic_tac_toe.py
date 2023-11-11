@@ -46,36 +46,45 @@ def check_win(board, player_symbol):
             return True
 
     return False
+
+
 def main():
     board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     player_symbol = "0"
     computer_symbol = "X"
+    moves_count = 0
     while True:
         draw_board(board)
         get_player_move(board, player_symbol)
-        print("Доска после хода компьютера")
-
+        print("Доска после хода игрока")
+        moves_count += 1
 
         if check_win(board, player_symbol):
             draw_board(board)
             print("Вы победили!")
-
             break
+
+        if moves_count == 9:
+            draw_board(board)
+            print("Ничья!")
+            break
+
         get_computer_move(board, computer_symbol)
+        print("Доска после хода компьютера")
+        moves_count += 1
+
         if check_win(board, computer_symbol):
             draw_board(board)
             print("Компьютер победил. Попробуйте еще раз.")
             break
-        if draw(board):
+
+        if moves_count == 9:
             draw_board(board)
             print("Ничья!")
             break
 
 
 
-def draw(board):
-    if " " not in board:
-        return True
-    return False
+
 
 main()
